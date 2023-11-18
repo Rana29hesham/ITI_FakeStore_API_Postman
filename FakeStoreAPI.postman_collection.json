@@ -1,0 +1,1391 @@
+{
+	"info": {
+		"_postman_id": "c337c14b-801a-4b0a-90ff-430eb08805e1",
+		"name": "FakeStoreAPI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17189412"
+	},
+	"item": [
+		{
+			"name": "1-Products",
+			"item": [
+				{
+					"name": "1-Get All Products",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"1-Check Status Code\",function(){\r",
+									"    pm.expect(pm.response.code).is.equal(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"2-check that All data related to the product – title, price, image, description arenot empty \",function(){\r",
+									"    for(var i=0 ; i< pm.response.json().length; i++){\r",
+									"      pm.expect(pm.response.json()[i]).is.not.null\r",
+									"      console.log(pm.response.json()[i])\r",
+									"    }\r",
+									"});\r",
+									"\r",
+									"pm.test(\"3-check that the total number of products is equal to 20\",function(){\r",
+									"      pm.expect(pm.response.json().length).is.equals(20)\r",
+									"      console.log(pm.response.json().length)\r",
+									"    \r",
+									"});\r",
+									"\r",
+									"pm.test(\"4-check Response body includes (title, price, image, description , rating) \",function(){\r",
+									"    for(var i=0 ; i< pm.response.json().length; i++){\r",
+									"      pm.expect(pm.response.json()[i]).have.property(\"title\")\r",
+									"      pm.expect(pm.response.json()[i]).have.property(\"price\")\r",
+									"      pm.expect(pm.response.json()[i]).have.property(\"description\")\r",
+									"      pm.expect(pm.response.json()[i]).have.property(\"image\")\r",
+									"      pm.expect(pm.response.json()[i]).have.property(\"rating\")\r",
+									"   \r",
+									"    }\r",
+									"});\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseURL}}products",
+							"host": [
+								"{{BaseURL}}products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "2-Get Single Product",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"pm.test(\"1-Check Status Code\",function(){\r",
+									"    pm.expect(pm.response.code).is.equal(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"2-check that All product data (title, price, images, description) arenot empty \",function(){\r",
+									"      pm.expect(pm.response.json()).not.null\r",
+									"      console.log(pm.response.json())\r",
+									"    \r",
+									"});\r",
+									"\r",
+									"pm.test(\"3-check Response body includes (title, price, image, description , rating) \",function(){\r",
+									"      pm.expect(pm.response.json()).have.property(\"title\")\r",
+									"      pm.expect(pm.response.json()).have.property(\"price\")\r",
+									"      pm.expect(pm.response.json()).have.property(\"description\")\r",
+									"      pm.expect(pm.response.json()).have.property(\"image\")\r",
+									"      pm.expect(pm.response.json()).have.property(\"rating\")\r",
+									"   \r",
+									"    \r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseURL}}products/1",
+							"host": [
+								"{{BaseURL}}products"
+							],
+							"path": [
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3-Limit Results",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"1-Check Status Code\",function(){\r",
+									"    pm.expect(pm.response.code).is.equal(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"2-check that product data (title, price, images, description) arenot empty \",function(){\r",
+									"    for(var i=0 ; i< pm.response.json().length; i++){\r",
+									"      pm.expect(pm.response.json()[i]).not.null\r",
+									"      console.log(pm.response.json()[i])\r",
+									"    }\r",
+									"});\r",
+									"\r",
+									"pm.test(\"3-check that number of products is equal to 5\",function(){\r",
+									"      pm.expect(pm.response.json().length).is.equals(5)\r",
+									"      console.log(pm.response.json().length)\r",
+									"    \r",
+									"});\r",
+									"pm.test(\"4-check Response body includes (title, price, image, description , rating) \",function(){\r",
+									"    for(var i=0 ; i< pm.response.json().length; i++){\r",
+									"      pm.expect(pm.response.json()[i]).have.property(\"title\")\r",
+									"      pm.expect(pm.response.json()[i]).have.property(\"price\")\r",
+									"      pm.expect(pm.response.json()[i]).have.property(\"description\")\r",
+									"      pm.expect(pm.response.json()[i]).have.property(\"image\")\r",
+									"      pm.expect(pm.response.json()[i]).have.property(\"rating\")\r",
+									"   \r",
+									"    }\r",
+									"});\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseURL}}products?limit=5",
+							"host": [
+								"{{BaseURL}}products"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "4-Sort Results",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"1-Check Status Code\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"})\r",
+									"\r",
+									"pm.test(\"2-check that All data related to the product – title, price, images, description arenot null \",function(){\r",
+									"    for(var i=0 ; i< pm.response.json().length; i++){\r",
+									"      pm.expect(pm.response.json()[i]).not.null\r",
+									"      console.log(pm.response.json()[i])\r",
+									"    }\r",
+									"});\r",
+									"\r",
+									"pm.test(\"3-check that products sorted by id desc\", function() {\r",
+									"    sortExpected = pm.response.json().sort(function(a,b){return b.id - a.id });\r",
+									"    sortActaul =pm.response.json();\r",
+									"    pm.expect(sortExpected).to.eql(sortActaul);\r",
+									"    console.log(sortExpected);\r",
+									"    console.log(\"-----------------------\");\r",
+									"    console.log(sortActaul);\r",
+									"\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseURL}}products?sort=desc",
+							"host": [
+								"{{BaseURL}}products"
+							],
+							"query": [
+								{
+									"key": "sort",
+									"value": "desc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "5-Get All Categories",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"1-Check Status Code\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"})\r",
+									"pm.test(\"2-Check categories name\",function(){\r",
+									" pm.expect(pm.response.json()).contains(\"electronics\", \"jewelery\", \"men's clothing\",\"women's clothing\")\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseURL}}products/categories",
+							"host": [
+								"{{BaseURL}}products"
+							],
+							"path": [
+								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "6-Get Products in Specific Category",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"1-Check Status Code\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"})\r",
+									"\r",
+									"pm.test(\"2-Check that all products are in jewelery category\", function () {\r",
+									"    for(var i ; i<pm.response.json().length; i++){\r",
+									"        pm.expect(pm.response.json()[i].category).is.equal(\"jewelery\");\r",
+									"    }\r",
+									"\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseURL}}products/category/jewelery",
+							"host": [
+								"{{BaseURL}}products"
+							],
+							"path": [
+								"category",
+								"jewelery"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "7-Add New Product",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('1-Check Status Code', function () {\r",
+									"    pm.expect(pm.response.code).is.equal(200);\r",
+									"})\r",
+									"\r",
+									"pm.test(\"2-Check that product's name has been added successfully\",function(){\r",
+									"    pm.expect(pm.response.json().title).is.not.null;\r",
+									"    console.log(pm.response.json().title);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"3-Check that product's price has been added successfully\",function(){\r",
+									"    pm.expect(pm.response.json().price).is.not.null;\r",
+									"    console.log(pm.response.json().price);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"4-Check that product's description has been added successfully\",function(){\r",
+									"    pm.expect(pm.response.json().description).is.not.null;\r",
+									"    console.log(pm.response.json().description);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"5-Check that product's image has been added successfully\",function(){\r",
+									"    pm.expect(pm.response.json().image).is.not.null;\r",
+									"    console.log(pm.response.json().image);\r",
+									"});\r",
+									"pm.test(\"6-Check that product's category has been added successfully\",function(){\r",
+									"    pm.expect(pm.response.json().category).is.not.null;\r",
+									"    console.log(pm.response.json().category);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n                   \"title\":\"test product\",\r\n                    \"price\": 13.5,\r\n                    \"description\": \"lorem ipsum set\",\r\n                    \"image\": \"https://i.pravatar.cc\",\r\n                    \"category\": \"electronic\"\r\n                }\r\n                \r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseURL}}products",
+							"host": [
+								"{{BaseURL}}products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "8-Update Product",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('1-Check Status Code', function () {\r",
+									"    pm.expect(pm.response.code).is.equal(200);\r",
+									"})\r",
+									"\r",
+									"pm.test(\"2-Check that product's name has been updated successfully\",function(){\r",
+									"    pm.expect(pm.response.json().title).is.equals(\"test product\");\r",
+									"    console.log(pm.response.json().title);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"3-Check that product's price has been updated successfully\",function(){\r",
+									"    pm.expect(pm.response.json().price).is.equals(\"13.5\");\r",
+									"    console.log(pm.response.json().price);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"4-Check that product's description has been updated successfully\",function(){\r",
+									"    pm.expect(pm.response.json().description).is.equals(\"lorem ipsum set\");\r",
+									"    console.log(pm.response.json().description);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"5-Check that product's image has been updated successfully\",function(){\r",
+									"    pm.expect(pm.response.json().image).is.equals(\"https://i.pravatar.cc\");\r",
+									"    console.log(pm.response.json().image);\r",
+									"});\r",
+									"pm.test(\"6-Check that product's category has been updated successfully\",function(){\r",
+									"    pm.expect(pm.response.json().category).is.equals(\"electronic\");\r",
+									"    console.log(pm.response.json().category);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\r\n                    \"title\": \"test product\",\r\n                    \"price\": \"13.5\",\r\n                    \"description\": \"lorem ipsum set\",\r\n                    \"image\": \"https://i.pravatar.cc\",\r\n                    \"category\": \"electronic\"\r\n                }\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseURL}}products/7",
+							"host": [
+								"{{BaseURL}}products"
+							],
+							"path": [
+								"7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "9-Delete Product",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"1-Check Status Code\", function () {\r",
+									"    pm.expect(pm.response.code).is.equal(200);\r",
+									"})\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{BaseURL}}products/6",
+							"host": [
+								"{{BaseURL}}products"
+							],
+							"path": [
+								"6"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "2-Carts",
+			"item": [
+				{
+					"name": "1-Get All Carts",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"1-Check Status Code\", function () {\r",
+									"    pm.expect(pm.response.code).is.equal(200);\r",
+									"})\r",
+									"\r",
+									"pm.test(\"2-Check that All carts have userID\", function () {\r",
+									"    for (var i = 0; i < pm.response.json().length; i++) {\r",
+									"        pm.expect(pm.response.json()[i].userId).is.not.null;\r",
+									"        console.log(pm.response.json()[i].userId);\r",
+									"    }\r",
+									"})\r",
+									"\r",
+									"pm.test(\"3-Check that All carts have date\", function () {\r",
+									"    for (var i = 0; i < pm.response.json().length; i++) {\r",
+									"        pm.expect(pm.response.json()[i].date).is.not.null;\r",
+									"        console.log(pm.response.json()[i].date);\r",
+									"    }\r",
+									"})\r",
+									"\r",
+									"pm.test(\"4-Check that every product has quantity\", function () {\r",
+									"    for (var i = 0; i < pm.response.json().length; i++) {\r",
+									"        for (var j = 0; j < pm.response.json()[i].products.length; j++) {\r",
+									"            pm.expect(pm.response.json()[i].products[j].quantity).to.be.above(0);\r",
+									"            console.log(\"productId :\"+pm.response.json()[i].products[j].productId+\" \"+\"quantity :\"+ pm.response.json()[i].products[j].quantity);\r",
+									"\r",
+									"        }\r",
+									"    }\r",
+									"});\r",
+									"\r",
+									"pm.test(\"5-check that the userId does not have more than one cart at the same time \",function(){\r",
+									"    for(var i=0 ; i< pm.response.json().length-1; i++){\r",
+									"        if(pm.response.json()[i].userId == pm.response.json()[i+1].userId && pm.response.json()[i].date == pm.response.json()[i+1].date){\r",
+									"            pm.expect.fail(\"User ${pm.response.json()[i].userId} has more than one cart at the same time\");\r",
+									"           // console.log(pm.response.json()[i]);\r",
+									"            \r",
+									"        \r",
+									"        }\r",
+									"    }\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseURL}}carts",
+							"host": [
+								"{{BaseURL}}carts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "2-Get Single Cart",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"1-Check Status Code\",function(){\r",
+									"    pm.expect(pm.response.code).is.equal(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"2-Check that cart has userID\", function () {\r",
+									"      pm.expect(pm.response.json().userId).is.not.null;\r",
+									"        console.log(pm.response.json().userId);\r",
+									"    \r",
+									"})\r",
+									"pm.test(\"3-Check that cart has date\", function () {\r",
+									"\r",
+									"        pm.expect(pm.response.json().date).is.not.null;\r",
+									"        console.log(pm.response.json().date);\r",
+									"    \r",
+									"})\r",
+									"\r",
+									"pm.test(\"4-Check that All products have quantity\", function () {\r",
+									"    for (var i = 0; i < pm.response.json().products.length; i++) {\r",
+									"            pm.expect(pm.response.json().products[i].quantity).to.be.above(0);\r",
+									"             console.log(\"productId :\"+pm.response.json().products[i].productId+\" \"+\"quantity :\"+ pm.response.json().products[i].quantity);\r",
+									"            \r",
+									"        \r",
+									"    }\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseURL}}carts/5",
+							"host": [
+								"{{BaseURL}}carts"
+							],
+							"path": [
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3-Limit Results",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"1-Check Status Code\",function(){\r",
+									"    pm.expect(pm.response.code).is.equal(200);\r",
+									"});\r",
+									"pm.test(\"2-check that the number of carts is equal to 5\",function(){\r",
+									"      pm.expect(pm.response.json().length).is.equals(5)\r",
+									"      console.log(pm.response.json().length)\r",
+									"    \r",
+									"});\r",
+									"pm.test(\"3-Check that All carts have userID\", function () {\r",
+									"    for (var i = 0; i < pm.response.json().length; i++) {\r",
+									"        pm.expect(pm.response.json()[i].userId).is.not.null;\r",
+									"        console.log(pm.response.json()[i].userId);\r",
+									"    }\r",
+									"})\r",
+									"pm.test(\"4-Check that All carts have date\", function () {\r",
+									"    for (var i = 0; i < pm.response.json().length; i++) {\r",
+									"        pm.expect(pm.response.json()[i].date).is.not.null;\r",
+									"        console.log(pm.response.json()[i].date);\r",
+									"    }\r",
+									"})\r",
+									"\r",
+									"pm.test(\"5-Check that All products have quantity\", function () {\r",
+									"    for (var i = 0; i < pm.response.json().length; i++) {\r",
+									"        for (var j = 0; j < pm.response.json()[i].products.length; j++) {\r",
+									"            pm.expect(pm.response.json()[i].products[j].quantity).to.be.above(0);\r",
+									"            console.log(pm.response.json()[i].products[j].quantity);\r",
+									"        }\r",
+									"    }\r",
+									"});\r",
+									"\r",
+									"pm.test(\"6-check that the userId does not have more than one cart at the same time \",function(){\r",
+									"    for(var i=0 ; i< pm.response.json().length-1; i++){\r",
+									"        if(pm.response.json()[i].userId == pm.response.json()[i+1].userId && pm.response.json()[i].date == pm.response.json()[i+1].date){\r",
+									"            pm.expect.fail(\"User ${pm.response.json()[i].userId} has more than one cart at the same time\");\r",
+									"           // console.log(pm.response.json()[i]);\r",
+									"            \r",
+									"        \r",
+									"        }\r",
+									"    }\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseURL}}carts?limit=5",
+							"host": [
+								"{{BaseURL}}carts"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "4-Sort Results",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"1-Check Status Code\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"})\r",
+									"\r",
+									"pm.test(\"2-check that carts sorted by cartId desc\", function() {\r",
+									"    sortExpected = pm.response.json().sort(function(a,b){return b.id - a.id });\r",
+									"    sortActaul =pm.response.json();\r",
+									"    pm.expect(sortExpected).to.eql(sortActaul);\r",
+									"    console.log(sortExpected);\r",
+									"    console.log(\"-----------------------\");\r",
+									"    console.log(sortActaul);\r",
+									"\r",
+									"});\r",
+									"\r",
+									"pm.test(\"3-Check that All carts has userID\", function () {\r",
+									"    for (var i = 0; i < pm.response.json().length; i++) {\r",
+									"        pm.expect(pm.response.json()[i].userId).is.not.null;\r",
+									"        console.log(pm.response.json()[i].userId);\r",
+									"    }\r",
+									"})\r",
+									"pm.test(\"4-Check that All carts has date\", function () {\r",
+									"    for (var i = 0; i < pm.response.json().length; i++) {\r",
+									"        pm.expect(pm.response.json()[i].date).is.not.null;\r",
+									"        console.log(pm.response.json()[i].date);\r",
+									"    }\r",
+									"})\r",
+									"\r",
+									"pm.test(\"5-Check that All products have quantity\", function () {\r",
+									"    for (var i = 0; i < pm.response.json().length; i++) {\r",
+									"        for (var j = 0; j < pm.response.json()[i].products.length; j++) {\r",
+									"            pm.expect(pm.response.json()[i].products[j].quantity).to.be.above(0);\r",
+									"            console.log(pm.response.json()[i].products[j].quantity);\r",
+									"        }\r",
+									"    }\r",
+									"});\r",
+									"\r",
+									"pm.test(\"6-check that the userId does not have more than one cart at the same time \",function(){\r",
+									"    for(var i=0 ; i< pm.response.json().length-1; i++){\r",
+									"        if(pm.response.json()[i].userId == pm.response.json()[i+1].userId && pm.response.json()[i].date == pm.response.json()[i+1].date){\r",
+									"            pm.expect.fail(\"User ${pm.response.json()[i].userId} has more than one cart at the same time\");\r",
+									"           // console.log(pm.response.json()[i]);\r",
+									"            \r",
+									"        \r",
+									"        }\r",
+									"    }\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseURL}}carts?sort=desc",
+							"host": [
+								"{{BaseURL}}carts"
+							],
+							"query": [
+								{
+									"key": "sort",
+									"value": "desc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "5-Get carts in Date Range",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"1-Check Status Code\", function () {\r",
+									"    pm.expect(pm.response.code).is.equal(200);\r",
+									"})\r",
+									"\r",
+									"pm.test(\"2-Check that every cart has userID\", function () {\r",
+									"    for (var i = 0; i < pm.response.json().length; i++) {\r",
+									"        pm.expect(pm.response.json()[i].userId).is.not.null;\r",
+									"        console.log(pm.response.json()[i].userId);\r",
+									"    }\r",
+									"})\r",
+									"\r",
+									"pm.test(\"3-Check that every product has quantity\", function () {\r",
+									"    for (var i = 0; i < pm.response.json().length; i++) {\r",
+									"        for (var j = 0; j < pm.response.json()[i].products.length; j++) {\r",
+									"            pm.expect(pm.response.json()[i].products[j].quantity).to.be.above(0);\r",
+									"            console.log(pm.response.json()[i].products[j].quantity);\r",
+									"        }\r",
+									"    }\r",
+									"});\r",
+									"\r",
+									"pm.test(\"4-check that the userId does not have more than one cart at the same time \",function(){\r",
+									"    for(var i=0 ; i< pm.response.json().length-1; i++){\r",
+									"        if(pm.response.json()[i].userId == pm.response.json()[i+1].userId && pm.response.json()[i].date == pm.response.json()[i+1].date){\r",
+									"            pm.expect.fail(\"User ${pm.response.json()[i].userId} has more than one cart at the same time\");\r",
+									"           // console.log(pm.response.json()[i]);\r",
+									"            \r",
+									"        \r",
+									"        }\r",
+									"    }\r",
+									"});\r",
+									"\r",
+									"pm.test(\"5-Check that date of all carts between (2019-12-10 - 2020-10-10)\", function () {\r",
+									"    var startDate = new Date(\"2019-12-10T00:00:00.000Z\");\r",
+									"    var endDate = new Date(\"2020-10-10T00:00:00.000Z\");\r",
+									"\r",
+									"    for (var i = 0; i < pm.response.json().length; i++) {\r",
+									"        var cartDate = new Date(pm.response.json()[i].date);\r",
+									"        pm.expect(cartDate).to.be.within(startDate, endDate);\r",
+									"        console.log(pm.response.json()[i]);\r",
+									"    }\r",
+									"});\r",
+									"\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseURL}}carts?startdate=2019-12-10&enddate=2020-10-10",
+							"host": [
+								"{{BaseURL}}carts"
+							],
+							"query": [
+								{
+									"key": "startdate",
+									"value": "2019-12-10"
+								},
+								{
+									"key": "enddate",
+									"value": "2020-10-10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "6-Get User Cart",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"1-Check Status Code\",function(){\r",
+									"    pm.expect(pm.response.code).is.equal(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"2-Check that cart has userID\", function () {\r",
+									"    for (var i = 0; i < pm.response.json().length; i++) {\r",
+									"        pm.expect(pm.response.json()[i].userId).is.not.null;\r",
+									"         console.log(\"UserId:\"+pm.response.json()[i].userId);\r",
+									"    }\r",
+									"    \r",
+									"})\r",
+									"\r",
+									"pm.test(\"3-Check that All carts have date\", function () {\r",
+									"    for (var i = 0; i < pm.response.json().length; i++) {\r",
+									"        pm.expect(pm.response.json()[i].date).is.not.null;\r",
+									"        console.log(pm.response.json()[i].date);\r",
+									"    }\r",
+									"})\r",
+									"\r",
+									"pm.test(\"4-Check that every product has quantity\", function () {\r",
+									"    for (var i = 0; i < pm.response.json().length; i++) {\r",
+									"        for (var j = 0; j < pm.response.json()[i].products.length; j++) {\r",
+									"            pm.expect(pm.response.json()[i].products[j].quantity).to.be.above(0);\r",
+									"           console.log(\"productId :\"+pm.response.json()[i].products[j].productId+\" \"+\"quantity :\"+ pm.response.json()[i].products[j].quantity);\r",
+									"        }\r",
+									"    }\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseURL}}carts/user/1",
+							"host": [
+								"{{BaseURL}}carts"
+							],
+							"path": [
+								"user",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "7-Add New Product",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('1-Check Status Code', function () {\r",
+									"    pm.expect(pm.response.code).is.equal(200);\r",
+									"})\r",
+									"\r",
+									"pm.test(\"2-Check that every product has quantity\", function () {\r",
+									"    for (var i = 0; i < pm.response.json().products.length; i++) {\r",
+									"            pm.expect(pm.response.json().products[i].quantity).to.be.above(0);\r",
+									"            console.log(\"productId :\"+pm.response.json().products[i].productId+\" \"+\"quantity :\"+ pm.response.json().products[i].quantity);\r",
+									"        \r",
+									"    }\r",
+									"});\r",
+									"\r",
+									"pm.test(\"3-Check that every cart has date\", function () {\r",
+									"    for (var i = 0; i < pm.response.json().length; i++) {\r",
+									"        pm.expect(pm.response.json()[i].date).is.not.null;\r",
+									"        console.log(pm.response.json()[i].date);\r",
+									"    }\r",
+									"})\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "  {\r\n                    \"userId\":5,\r\n                    \"date\":\"2020-02-03\",\r\n                    \"products\":[\r\n                        {\r\n                            \"productId\":5,\r\n                             \"quantity\":1\r\n                            },\r\n                            \r\n                            {\r\n                                \"productId\":1,\r\n                                 \"quantity\":5\r\n                                }\r\n                        ]\r\n                }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseURL}}carts",
+							"host": [
+								"{{BaseURL}}carts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "8-Update Cart",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"1-Check Status Code\", function () {\r",
+									"    pm.expect(pm.response.code).is.equal(200);\r",
+									"})\r",
+									"\r",
+									"pm.test(\"2-Check that date has been updated successfully\",function(){\r",
+									"    pm.expect(pm.response.json().date).is.equals(\"2019-12-10\");\r",
+									"    console.log(\"Date: \" +pm.response.json().date);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"3-Check that product's quantity has been updated successfully\", function () {\r",
+									"    for (var i = 0; i < pm.response.json().products.length; i++) {\r",
+									"            pm.expect(pm.response.json().products[i].quantity).is.equals(3);\r",
+									"             console.log(\"productId :\"+pm.response.json().products[i].productId+\" \"+\"quantity :\"+ pm.response.json().products[i].quantity);\r",
+									"            \r",
+									"        \r",
+									"    }\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n                    \"userId\":3,\r\n                    \"date\":\"2019-12-10\",\r\n                    \"products\":[\r\n                        {\r\n                        \"productId\":1,\r\n                        \"quantity\":3\r\n                        \r\n                        }]\r\n                }\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseURL}}carts/7",
+							"host": [
+								"{{BaseURL}}carts"
+							],
+							"path": [
+								"7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "9-Delete Cart",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"1-Check Status Code\", function () {\r",
+									"    pm.expect(pm.response.code).is.equal(200);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{BaseURL}}carts/6",
+							"host": [
+								"{{BaseURL}}carts"
+							],
+							"path": [
+								"6"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "3-User",
+			"item": [
+				{
+					"name": "1-Get All Users",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"1-Check Status Code\",function(){\r",
+									"    var statusCode=pm.response.code;\r",
+									"    pm.expect(statusCode).is.equal(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"2-check that All users data arenot empty \",function(){\r",
+									"    for(var i=0 ; i< pm.response.json().length; i++){\r",
+									"      var userData =pm.response.json()[i];\r",
+									"      pm.expect(userData).is.not.null\r",
+									"      console.log(userData)\r",
+									"    }\r",
+									"});\r",
+									"pm.test(\"3-Check Email Format Validation\", function () {\r",
+									"    var emailRegex = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;\r",
+									"        for(var i=0 ; i< pm.response.json().length; i++){\r",
+									"        var email = pm.response.json()[i].email;\r",
+									"        pm.expect(email).to.match(emailRegex);\r",
+									"         console.log(email);\r",
+									"        \r",
+									"        }\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseURL}}users",
+							"host": [
+								"{{BaseURL}}users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "2-Get Single User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"1-Check Status Code\",function(){\r",
+									"    var statusCode=pm.response.code;\r",
+									"    pm.expect(statusCode).is.equal(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"2-check that All user data arenot null \",function(){\r",
+									"      var userData =pm.response.json();\r",
+									"      pm.expect(userData).is.not.null\r",
+									"      console.log(userData)\r",
+									"    \r",
+									"});\r",
+									"pm.test(\"3-Check Email Format Validation\", function () {\r",
+									"    var emailRegex = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;\r",
+									"        var email = pm.response.json().email;\r",
+									"        pm.expect(email).to.match(emailRegex);\r",
+									"        console.log(\"User email\" + email);\r",
+									"        \r",
+									"        \r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseURL}}users/1",
+							"host": [
+								"{{BaseURL}}users"
+							],
+							"path": [
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3-Limit Results",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"1-Check Status Code\",function(){\r",
+									"    var statusCode=pm.response.code;\r",
+									"    pm.expect(statusCode).is.equal(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"2-check that All users data isnot null \",function(){\r",
+									"    for(var i=0 ; i< pm.response.json().length; i++){\r",
+									"      var userData =pm.response.json()[i];\r",
+									"      pm.expect(userData).is.not.null\r",
+									"      console.log(userData)\r",
+									"    }\r",
+									"});\r",
+									"\r",
+									"pm.test(\"3-Check Email Format Validation\", function () {\r",
+									"    var emailRegex = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;\r",
+									"        for(var i=0 ; i< pm.response.json().length; i++){\r",
+									"        var email = pm.response.json()[i].email;\r",
+									"        pm.expect(email).to.match(emailRegex);\r",
+									"         console.log(email);\r",
+									"        \r",
+									"        }\r",
+									"});\r",
+									"\r",
+									"pm.test(\"4-check that number of users is equal to 5\",function(){\r",
+									"      pm.expect(pm.response.json().length).is.equals(5)\r",
+									"      console.log(\"Results :\"+pm.response.json().length)\r",
+									"    \r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseURL}}users?limit=5",
+							"host": [
+								"{{BaseURL}}users"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "4-Sort Results",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"1-Check Status Code\",function(){\r",
+									"    var statusCode=pm.response.code;\r",
+									"    pm.expect(statusCode).is.equal(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"2-check that All user data arenot empty \",function(){\r",
+									"    for(var i=0 ; i< pm.response.json().length; i++){\r",
+									"      var userData =pm.response.json()[i];\r",
+									"      pm.expect(userData).is.not.null\r",
+									"      console.log(userData)\r",
+									"    }\r",
+									"});\r",
+									"\r",
+									"pm.test(\"3-Check Email Format Validation\", function () {\r",
+									"    var emailRegex = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;\r",
+									"        for(var i=0 ; i< pm.response.json().length; i++){\r",
+									"        var email = pm.response.json()[i].email;\r",
+									"        pm.expect(email).to.match(emailRegex);\r",
+									"         console.log(email);\r",
+									"        \r",
+									"        }\r",
+									"});\r",
+									"\r",
+									"pm.test(\"4-check that users sorted by userId desc\", function() {\r",
+									"    sortExpected = pm.response.json().sort(function(a,b){return b.id - a.id });\r",
+									"    sortActaul =pm.response.json();\r",
+									"    pm.expect(sortExpected).to.eql(sortActaul);\r",
+									"    console.log(sortExpected);\r",
+									"    console.log(\"-----------------------\");\r",
+									"    console.log(sortActaul);\r",
+									"\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseURL}}users?sort=desc",
+							"host": [
+								"{{BaseURL}}users"
+							],
+							"query": [
+								{
+									"key": "sort",
+									"value": "desc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "5-Add New User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"1-Check Status Code\",function(){\r",
+									"    var statusCode=pm.response.code;\r",
+									"    pm.expect(statusCode).is.equal(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"2-check that All user data is not null\",function(){\r",
+									"      var userData =pm.response.json();\r",
+									"      pm.expect(userData).is.not.null\r",
+									"      console.log(userData)\r",
+									"    \r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n                    \"email\":\"John@gmail.com\",\r\n                    \"username\":\"johnd\",\r\n                    \"password\":\"m38rmF$\",\r\n                    \"name\":{\r\n                        \"firstname\":\"John\",\r\n                        \"lastname\":\"Doe\"\r\n                    },\r\n                    \"address\":{\r\n                        \"city\":\"kilcoole\",\r\n                        \"street\":\"7835 new road\",\r\n                        \"number\":3,\r\n                        \"zipcode\":\"12926-3874\",\r\n                        \"geolocation\":{\r\n                            \"lat\":\"-37.3159\",\r\n                            \"long\":\"81.1496\"\r\n                        }\r\n                    },\r\n                    \"phone\":\"1-570-236-7033\"\r\n                }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseURL}}users",
+							"host": [
+								"{{BaseURL}}users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "6-Update User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"1-Check Status Code\", function () {\r",
+									"    pm.expect(pm.response.code).is.equal(200);\r",
+									"})\r",
+									"\r",
+									"pm.test(\"2-Check that street has been updated successfully\",function(){\r",
+									"    pm.expect(pm.response.json().address.street).is.equals(\"7835 new road\");\r",
+									"    console.log(\"street: \" +pm.response.json().address.street);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"3-Check that number has been updated successfully\",function(){\r",
+									"    pm.expect(pm.response.json().address.number).is.equals(3);\r",
+									"    console.log(\"number: \" +pm.response.json().address.number);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"4-Check that lastname has been updated successfully\",function(){\r",
+									"    pm.expect(pm.response.json().name.lastname).is.equals(\"Doe\");\r",
+									"    console.log(\"lastname: \" +pm.response.json().name.lastname);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "     {\r\n                \"email\":\"John@gmail.com\",\r\n                \"username\":\"johnd\",\r\n                \"password\":\"m38rmF$\",\r\n                \"name\":{\r\n                    \"firstname\":\"John\",\r\n                    \"lastname\":\"Doe\"\r\n                },\r\n                \"address\":{\r\n                    \"city\":\"kilcoole\",\r\n                    \"street\":\"7835 new road\",\r\n                    \"number\":3,\r\n                    \"zipcode\":\"12926-3874\",\r\n                    \"geolocation\":{\r\n                        \"lat\":\"-37.3159\",\r\n                        \"long\":\"81.1496\"\r\n                    }\r\n                },\r\n                \"phone\":\"1-570-236-7033\"\r\n                }\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseURL}}users/7",
+							"host": [
+								"{{BaseURL}}users"
+							],
+							"path": [
+								"7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "7-Delete User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"1-Check Status Code\", function () {\r",
+									"    pm.expect(pm.response.code).is.equal(200);\r",
+									"})\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{BaseURL}}users/6",
+							"host": [
+								"{{BaseURL}}users"
+							],
+							"path": [
+								"6"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "4-Login",
+			"item": [
+				{
+					"name": "1-User Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"1-Check Status Code\",function(){\r",
+									"    var statusCode=pm.response.code;\r",
+									"    pm.expect(statusCode).is.equal(200);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n                \"username\": \"mor_2314\",\r\n                \"password\": \"83r5^_\"\r\n            }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseURL}}auth/login",
+							"host": [
+								"{{BaseURL}}auth"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
